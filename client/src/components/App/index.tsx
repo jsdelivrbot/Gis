@@ -28,7 +28,7 @@ export class App extends React.Component<App.Props, App.State> {
 
   componentDidMount() {
     this.socket = new Socket("http://localhost:8493", this.props.actions.setStorage);
-    this.socket.setRoutes(["branches", "currentBranch", "diff", "commits"]);
+    this.socket.setRoutes(["init", "branches", "currentBranch", "diff", "commits"]);
     this.socket.listen();
   }
 

@@ -19,7 +19,7 @@ class Socket {
 	listen() {
 		this.routes.forEach(route => {
       this.socket.on(route, data => {
-        this.storage[route] = data;
+        route !== "init" ? this.storage[route] = data : this.storage = data;
         this.dispatch({storage: this.storage});
       });
     });

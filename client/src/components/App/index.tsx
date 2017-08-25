@@ -13,7 +13,8 @@ import "./style.css";
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
-    actions: typeof Actions;
+    actions: typeof Actions,
+    currentBranch: string
   }
 
   export interface State {
@@ -35,7 +36,7 @@ export class App extends React.Component<App.Props, App.State> {
     return (
       <div className="app">
         <Col md={12}>
-          <h3>Gis</h3>
+          <h3>Gis - {this.props.currentBranch}</h3>
           <Row>
             <Col md={3}>
               <Workdir/>
@@ -53,7 +54,7 @@ export class App extends React.Component<App.Props, App.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    todos: state.app
+    currentBranch: state.app.storage.currentBranch
   };
 }
 

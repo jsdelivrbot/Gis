@@ -1,8 +1,8 @@
 import { combineReducers, Reducer } from 'redux';
-import app, {State} from './app';
+import app, {AppState} from './app';
 
 export interface RootState {
-  app: State;
+  app: AppState.State;
 }
 
 export default combineReducers<RootState>({

@@ -7,6 +7,7 @@ import { RouteComponentProps } from "react-router";
 import { RootState } from "../../reducers";
 import { MainSection } from "../../components";
 import Socket from "../../utils/socket";
+import Workdir from "../Workdir";
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
@@ -31,7 +32,8 @@ export class App extends React.Component<App.Props, App.State> {
   render() {
     return (
       <div className={style.normal}>
-        Giss
+        <h3>Gis</h3>
+        <Workdir/>
         {this.props.children}
       </div>
     );

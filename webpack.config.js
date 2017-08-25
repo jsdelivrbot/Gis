@@ -80,6 +80,7 @@ module.exports = {
       // static assets
       { test: /\.html$/, use: 'html-loader' },
       { test: /\.png$/, use: 'url-loader?limit=10000' },
+      { test: /\.(eot|svg|ttf|woff|woff2)$/, use: 'url-loader?limit=10000' },
       { test: /\.jpg$/, use: 'file-loader' },
     ],
   },

@@ -16,27 +16,27 @@ export namespace Workdir {
 
 @connect(mapStateToProps)
 class Workdir extends React.Component<Workdir.Props, Workdir.State> {
-  componentDidMount() {
+  componentDidUpdate() {
     PR.prettyPrint()
   }
 
   render() {
     return (
       <div>
-      <Panel>
-      {
-        this.props.diff && this.props.diff.map((diff, index) => (
-          <div key={index}>
-          <h4>{diff.path}</h4>
-          {diff.textHunks && diff.textHunks.map((h, index) => (
-            <pre key={index} className="prettyprint">{h}</pre>
-            ))}
-          </div>
+        <Panel>
+        {
+          this.props.diff && this.props.diff.map((diff, index) => (
+            <div key={index}>
+              <h4>{diff.path}</h4>
+              {diff.textHunks && diff.textHunks.map((h, index) => (
+                <pre key={index} className="prettyprint">{h}</pre>
+              ))}
+            </div>
           ))
-      }
-      </Panel>
+        }
+        </Panel>
       </div>
-      )
+    )
   }
 }
 

@@ -1,20 +1,20 @@
 .todos-container {
-	& .message {
-		&.completed {
-			color: lightgray;
-			text-decoration: line-through;
-		}
-	}
+  & .message {
+    &.completed {
+      color: lightgray;
+      text-decoration: line-through;
+    }
+  }
 
-	& .todo-new {
-		display: flex;
+  & .todo-new {
+    display: flex;
 
-		& select {
-			flex: 1;
-		}
+    & select {
+      flex: 2;
+    }
 
-		& input {
-			flex: 3;
-		}
-	}
+    & input {
+      flex: 5;
+    }
+  }
 }

@@ -77,6 +77,14 @@ module.exports = {
           ]
         })
       },
+      {
+          test: /\.scss$/,
+          use: [
+            {loader: "style-loader"}, 
+            {loader: "css-loader"}, 
+            {loader: "sass-loader"}
+          ]
+      },
       // static assets
       { test: /\.html$/, use: 'html-loader' },
       { test: /\.png$/, use: 'url-loader?limit=10000' },

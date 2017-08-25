@@ -25,7 +25,7 @@ const onChange = async () => {
 const watch = () => {
 	onChange();
 	console.log("Watching files..");
-	chokidar.watch(".", {ignored: /(^|[\/\\])\../}).on("change", async (event, path) => {
+	chokidar.watch(".", {ignored: /(^|[\/\\])./}).on("change", async (event, path) => {
 	  if(path) {
 	  	onChange();
 		}

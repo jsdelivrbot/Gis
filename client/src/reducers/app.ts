@@ -57,7 +57,23 @@ const initialState: AppState.State = {
   	diff: [],
   	commits: []
   },
-  todos: []
+  todos: [
+  	{
+  		message: "Add todos ui",
+  		type: AppState.TodoType.BRANCH,
+  		status: AppState.TodoStatus.PENDING
+  	},
+  	{
+  		message: "test",
+  		type: AppState.TodoType.BRANCH,
+  		status: AppState.TodoStatus.PENDING
+  	},
+  	{
+  		message: "Add db",
+  		type: AppState.TodoType.COMMIT,
+  		status: AppState.TodoStatus.COMPLETED
+  	}
+  ]
 };
 
 export default handleActions<AppState.State, Action>({

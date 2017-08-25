@@ -8,6 +8,7 @@ import { MainSection } from "../../components";
 import Socket from "../../utils/socket";
 import Workdir from "../Workdir";
 import Commits from "../Commits";
+import Todos from "../Todos";
 import {Row, Col} from "react-bootstrap";
 import "./style.css";
 
@@ -42,6 +43,7 @@ export class App extends React.Component<App.Props, App.State> {
               <Commits/>
             </Col>
             <Col md={3}>
+              <Todos/>
               <Workdir/>
             </Col>
           </Row>

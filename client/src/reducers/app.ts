@@ -29,7 +29,24 @@ export namespace AppState {
 	  	currentBranch: string,
 	  	diff: Array<Diff>,
 	  	commits: Array<Commit>
-	  }
+	  },
+	  todos: Array<Todo>
+	}
+
+	export enum TodoType {
+		COMMIT = "COMMIT",
+		BRANCH = "BRANCH"
+	}
+
+	export enum TodoStatus {
+		COMPLETED = "COMPLETED",
+		PENDING = "PENDING"
+	}
+
+	export interface Todo {
+		type: TodoType,
+		message: string,
+		status: TodoStatus
 	}
 }
 
@@ -39,7 +56,8 @@ const initialState: AppState.State = {
   	currentBranch: "",
   	diff: [],
   	commits: []
-  }
+  },
+  todos: []
 };
 
 export default handleActions<AppState.State, Action>({

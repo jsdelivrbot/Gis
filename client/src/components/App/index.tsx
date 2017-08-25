@@ -39,10 +39,10 @@ export class App extends React.Component<App.Props, App.State> {
           <h3>Gis - {this.props.currentBranch}</h3>
           <Row>
             <Col md={3}>
-              <Workdir/>
+              <Commits/>
             </Col>
             <Col md={3}>
-              <Commits/>
+              <Workdir/>
             </Col>
           </Row>
           {this.props.children}

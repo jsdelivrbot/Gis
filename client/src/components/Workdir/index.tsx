@@ -25,7 +25,7 @@ class Workdir extends React.Component<Workdir.Props, Workdir.State> {
       <div>
         <Panel>
         {
-          this.props.diff ? this.props.diff.map((diff, index) => (
+          this.props.diff && this.props.diff.length ? this.props.diff.map((diff, index) => (
               <div key={index}>
                 <h4>{diff.path}</h4>
                 {diff.textHunks && diff.textHunks.map((h, index) => (

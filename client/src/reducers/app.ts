@@ -44,6 +44,7 @@ export namespace AppState {
   }
 
   export interface Todo {
+    id?: string,
     type: TodoType,
     message: string,
     status: TodoStatus
@@ -83,7 +84,7 @@ export default handleActions<AppState.State, Action>({
       storage: action.payload.storage
     };
   },
-  [Actions.ADD_TODO]: (state, action) => {
+  [Actions.SAVE_TODO]: (state, action) => {
     return {
       ...state,
       todos: [
@@ -91,5 +92,41 @@ export default handleActions<AppState.State, Action>({
         action.payload.todo
       ]
     };
+  },
+  [Actions.SET_BRANCHES]: (state, action) => {
+    return {
+      ...state,
+      storage: {
+        ...state.storage,
+        branches: action.payload.branches
+      }
+    }
+  },
+  [Actions.SET_DIFF]: (state, action) => {
+    return {
+      ...state,
+      storage: {
+        ...state.storage,
+        diff: action.payload.diff
+      }
+    }
+  },
+  [Actions.SET_COMMITS]: (state, action) => {
+    return {
+      ...state,
+      storage: {
+        ...state.storage,
+        commits: action.payload.commits
+      }
+    }
+  },
+  [Actions.SET_CURRENT_BRANCH]: (state, action) => {
+    return {
+      ...state,
+      storage: {
+        ...state.storage,
+        currentBranch: action.payload.currentBranch
+      }
+    }
   }
 }, initialState);

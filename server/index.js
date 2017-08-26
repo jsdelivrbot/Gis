@@ -1,12 +1,11 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const JsonDb = require("node-json-db");
 const observer = require("./observer");
+const Db = require("./db");
 
 const app = express();
 const http = require("http").Server(app);
-const db = new JsonDb("store.db", true, false);
 
 app.use(bodyParser.json());
 
@@ -39,7 +38,8 @@ io.on("connection", socket => {
   socket.emit("init", storage);
 
   socket.on("post/todo", todo => {
-    console.log(todo);
+    const savedTodo = Db.saveTodo(todo);
+    socket.emit("todo", saveTodo);
   });
 });
 

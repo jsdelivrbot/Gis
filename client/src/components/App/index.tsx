@@ -28,8 +28,30 @@ export class App extends React.Component<App.Props, App.State> {
   private socket: Socket;
 
   componentDidMount() {
-    this.socket = new Socket(this.props.actions.setStorage);
-    this.socket.setRoutes(["init", "branches", "currentBranch", "diff", "commits"]);
+    this.socket = new Socket();
+    this.socket.setRoutes([
+      {
+        path: "init",
+        handle: "storage",
+        onReceive: this.props.actions.setStorage
+      },
+      {
+        path: "branches",
+        onReceive: this.props.actions.setBranches
+      },
+      {
+        path: "currentBranch",
+        onReceive: this.props.actions.setCurrentBranch
+      },
+      {
+        path: "diff",
+        onReceive: this.props.actions.setDiff
+      },
+      {
+        path: "commits",
+        onReceive: this.props.actions.setCommits
+      }
+    ]);
     this.socket.listen();
   }
 

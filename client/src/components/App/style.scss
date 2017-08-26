@@ -4,5 +4,15 @@
   & .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+
+    & .center-container {
+      text-align: center;
+    }
+
+    & h3, h5 {
+      margin: 0px;
+    }
   }
 }

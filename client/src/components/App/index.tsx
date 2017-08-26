@@ -82,11 +82,13 @@ export class App extends React.Component<App.Props, App.State> {
         <Col md={12}>
           <div className="header">
             <h3>Gis - {this.props.currentBranch}</h3>
-            <div>
-              <h3>{this.state.time.toLocaleString()}</h3>
+            <div className="center-container">
+              <strong>{this.state.time.toLocaleString()}</strong>
+              <br/>
+              {this.props.config.origin}
             </div>
             <div>
-              <h3>{this.props.config.email} | {this.props.config.name}</h3>
+              <h5>{this.props.config.email} | {this.props.config.name}</h5>
             </div>
           </div>
           <Row>

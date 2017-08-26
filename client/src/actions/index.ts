@@ -34,7 +34,13 @@ export const saveTodo = createAction<{todo: AppState.Todo}>(Actions[Actions.SAVE
 
 export function addTodo(todo: AppState.Todo) {
   return dispatch => {
-    Socket.getSocket().emit("post/todo", todo);
+    Socket.getSocket().emit("post/todos", [todo]);
+  }
+}
+
+export function updateTodos(todos: Array<AppState.Todo>) {
+  return dispatch => {
+    Socket.getSocket().emit("post/todos", todos);
   }
 }
 

@@ -41,8 +41,8 @@ io.on("connection", socket => {
     todos: Db.getAllTodos()
   });
 
-  socket.on("post/todo", todo => {
-    const savedTodo = Db.saveTodo(todo);
+  socket.on("post/todos", todos => {
+    todos.map(todo => Db.saveTodo(todo));
     socket.emit("todos", Db.getAllTodos());
   });
 

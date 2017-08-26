@@ -13,6 +13,8 @@ import "./styles.scss";
 export namespace Todos {
   export interface Props {
     todos?: Array<AppState.Todo>,
+    branches?: Array<AppState.Branch>,
+    commits?: Array<AppState.Commit>,
     actions?: typeof Actions
   }
 
@@ -34,6 +36,29 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
     this.handleTodoTypeChange = this.handleTodoTypeChange.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  componentWillReceiveProps(props: Todos.Props) {
+    if(JSON.stringify(props) !== JSON.stringify(this.props)) {
+      this.checkForFinishTodos(props.todos, props.branches, props.commits);
+    }
+  }
+
+  checkForFinishTodos(todos: Array<AppState.Todo>, 
+    branches: Array<AppState.Branch>, 
+    commits: Array<AppState.Commit>
+  ) {
+    const pendingTodos = todos.filter(t => t.status === AppState.TodoStatus.PENDING);
+    const finishedTodos = pendingTodos.filter(todo => {
+      const message = todo.message;
+      return branches.some(branch => branch.indexOf(message) !== -1) || 
+        commits.some(commit => commit.message.indexOf(message) !== -1);
+    });
+    const completedTodos = finishedTodos.map(todo => {
+      todo.status = AppState.TodoStatus.COMPLETED;
+      return todo;
+    });
+    this.props.actions.updateTodos(completedTodos);
   }
 
   addTodo(event) {
@@ -109,7 +134,9 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    todos: state.app.todos
+    todos: state.app.todos,
+    branches: state.app.branches,
+    commits: state.app.commits
   };
 }
 

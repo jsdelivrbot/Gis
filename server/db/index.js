@@ -4,13 +4,22 @@ const uniqid = require("uniqid");
 const db = new JsonDb("./store.db", true, false);
 
 function saveTodo(todo) {
+  if(todo.id) {
+    const todoWithIndex = getTodoById(todo.id);
+    db.push(`/todos[${todoWithIndex.index}]`, todo, true);
+    return todo;
+  }
   todo.id = uniqid();
   db.push("/todos[]", todo);
   return todo;
 }
 
 function getAllTodos() {
-  return db.getData("/todos");
+  try {
+    return db.getData("/todos");
+  } catch(e) {
+    return [];
+  }
 }
 
 function getTodoById(id) {

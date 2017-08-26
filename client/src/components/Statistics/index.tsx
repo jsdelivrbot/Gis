@@ -33,7 +33,8 @@ class Statistics extends React.Component<Statistics.Props, Statistics.State> {
     }
   }
 
-  calculateCommitLines(commits): {added: number, removed: number} {
+  calculateCommitLines(_commits: Array<AppState.Commit>): {added: number, removed: number} {
+    const commits = _commits.filter(commit => commit.author.email === this.props.config.email);
     let added = 0, removed = 0;
     for(let i=0;i<commits.length;i++) {
       const commit = commits[i];

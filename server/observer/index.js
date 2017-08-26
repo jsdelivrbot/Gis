@@ -25,7 +25,7 @@ const onChange = async () => {
 const watch = () => {
 	onChange();
 	console.log("Watching files..");
-	chokidar.watch(".", {ignored: /node_modules/}).on("change", async (event, path) => {
+	chokidar.watch(".", {ignored: /(node_modules|.*db\.json)/}).on("change", async (event, path) => {
 	  if(path) {
 	  	onChange();
 		}

@@ -70,7 +70,7 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
                   </span>
                 </ListGroupItem>
               )) :
-              "No todos!"
+              null
           }
           <ListGroupItem className="todo-new">
             <FormControl 

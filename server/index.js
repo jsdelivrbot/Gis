@@ -43,7 +43,7 @@ io.on("connection", socket => {
 
   socket.on("post/todo", todo => {
     const savedTodo = Db.saveTodo(todo);
-    socket.emit("todo", saveTodo);
+    socket.emit("todos", Db.getAllTodos());
   });
 });
 

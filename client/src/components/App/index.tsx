@@ -49,6 +49,10 @@ export class App extends React.Component<App.Props, App.State> {
       {
         path: "commits",
         onReceive: this.props.actions.setCommits
+      },
+      {
+        path: "todos",
+        onReceive: this.props.actions.setTodos
       }
     ]);
     this.socket.listen();

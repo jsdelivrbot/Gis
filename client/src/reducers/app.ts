@@ -112,5 +112,11 @@ export default handleActions<AppState.State, Action>({
       ...state,
       currentBranch: action.payload.currentBranch
     }
+  },
+  [Actions.SET_TODOS]: (state, action) => {
+    return {
+      ...state,
+      todos: action.payload.todos
+    }
   }
 }, initialState);

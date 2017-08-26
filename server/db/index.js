@@ -13,6 +13,17 @@ function getAllTodos() {
   return db.getData("/todos");
 }
 
+function getTodoById(id) {
+  const todos = getAllTodos();
+  for(let i=0;i<todos.length;i++) {
+    const todo = todos[i];
+    if(todo.id === id) {
+      return todo;
+    }
+  }
+  return null;
+}
+
 module.exports = {
   saveTodo,
   getAllTodos

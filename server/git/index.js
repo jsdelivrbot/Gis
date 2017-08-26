@@ -52,27 +52,50 @@ const getCommits = async repo => {
   const walk = Git.Revwalk.create(repo);
   walk.pushHead();
   const commits = await walk.getCommits();
-  return commits.map(m => {
-    const author = m.author();
-    return {
+  const tCommits = [];
+
+  for(let i=0;i<commits.length;i++) {
+    const commit = commits[i];
+
+    const diffs = await commit.getDiff();
+    const lineCount = {
+      added: 0,
+      removed: 0
+    };
+
+    for(let j=0;j<diffs.length;j++) {
+      const diff = diffs[j];
+      const diffDetails = await getDiffDetails(diff);
+      diffDetails.forEach(detail => {
+        detail.hunks.forEach(hunk => {
+          lineCount.added += hunk.lineCount.added;
+          lineCount.removed += hunk.lineCount.removed;
+        });
+      });
+    }
+
+    const author = commit.author();
+    tCommits.push({
       author: {
         email: author.email(),
         name: author.name()
       },
-      date: m.date(),
-      id: m.id().toString(),
-      message: m.messageRaw(),
-      time: m.time(),
-      summary: m.summary()
-    }
-  });
+      date: commit.date(),
+      id: commit.id().toString(),
+      message: commit.messageRaw(),
+      time: commit.time(),
+      summary: commit.summary(),
+      lineCount
+    });
+  }
+
+  return tCommits;
 }
 
 (async () => {
   const path = require("path");
   const repo = await openRepo(Git);
-  const diff = await getDiff(repo);
-  const commits = await getCommits(repo);
+  const branches = await getAllBranches(repo);
 })()
 
 module.exports = {

@@ -28,7 +28,11 @@ export namespace AppState {
     id: string,
     message: string,
     time: number,
-    summary: string
+    summary: string,
+    lineCount: {
+      added: number,
+      removed: number
+    }
   }
 
   export interface State {

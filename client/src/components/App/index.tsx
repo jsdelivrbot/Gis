@@ -10,7 +10,7 @@ import Workdir from "../Workdir";
 import Commits from "../Commits";
 import Todos from "../Todos";
 import {Row, Col} from "react-bootstrap";
-import "./style.css";
+import "./style.scss";
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
@@ -19,15 +19,30 @@ export namespace App {
   }
 
   export interface State {
-    /* empty */
+    time: Date
   }
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class App extends React.Component<App.Props, App.State> {
   private socket: Socket;
+  private timer;
+
+  constructor() {
+    super();
+    this.state = {
+      time: new Date()
+    }
+  }
+
+  componentWillUnmount() {
+    this.timer && clearInterval(this.timer);
+  }
 
   componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState({time: new Date()});
+    }, 1000);
     this.socket = new Socket();
     this.socket.setRoutes([
       {
@@ -62,7 +77,12 @@ export class App extends React.Component<App.Props, App.State> {
     return (
       <div className="app">
         <Col md={12}>
-          <h3>Gis - {this.props.currentBranch}</h3>
+          <div className="header">
+            <h3>Gis - {this.props.currentBranch}</h3>
+            <div>
+              <h3>{this.state.time.toLocaleString()}</h3>
+            </div>
+          </div>
           <Row>
             <Col md={3}>
               <Commits/>

@@ -1,16 +1,13 @@
 import {createStore, applyMiddleware, Store, compose} from 'redux';
 import thunk from "redux-thunk";
-import rootReducer, { RootState } from '../reducers';
+import rootReducer, {RootState} from '../reducers';
 
 export function configureStore(initialState?: RootState): Store<RootState> {
-  const create = window.devToolsExtension
-    ? window.devToolsExtension()(createStore)
-    : createStore;
-
-  const store = create(
+  const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const store = createStore(
     rootReducer, 
-    compose(applyMiddleware(thunk)), 
-    initialState
+    initialState,
+    composeEnhancers(applyMiddleware(thunk))
   ) as Store<RootState>;
 
   if (module.hot) {

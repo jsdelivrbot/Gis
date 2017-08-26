@@ -18,13 +18,20 @@ function getTodoById(id) {
   for(let i=0;i<todos.length;i++) {
     const todo = todos[i];
     if(todo.id === id) {
+      todo.index = i;
       return todo;
     }
   }
   return null;
 }
 
+function removeTodoById(id) {
+  const {index} = getTodoById(id);
+  db.delete((`/todos[${index}]`);
+}
+
 module.exports = {
   saveTodo,
-  getAllTodos
+  getAllTodos,
+  removeTodoById
 };

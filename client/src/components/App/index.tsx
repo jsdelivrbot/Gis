@@ -1,10 +1,11 @@
 import * as React from "react";
 import * as Actions from "../../actions";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router";
-import { RootState } from "../../reducers";
-import { MainSection } from "../../components";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {RouteComponentProps} from "react-router";
+import {RootState} from "../../reducers";
+import {MainSection} from "../../components";
+import {AppState} from "../../reducers/app";
 import Socket from "../../utils/socket";
 import Workdir from "../Workdir";
 import Commits from "../Commits";
@@ -16,7 +17,8 @@ import "./style.scss";
 export namespace App {
   export interface Props extends RouteComponentProps<void> {
     actions: typeof Actions,
-    currentBranch: string
+    currentBranch: string,
+    config: AppState.Config
   }
 
   export interface State {
@@ -83,6 +85,9 @@ export class App extends React.Component<App.Props, App.State> {
             <div>
               <h3>{this.state.time.toLocaleString()}</h3>
             </div>
+            <div>
+              <h3>{this.props.config.email} | {this.props.config.name}</h3>
+            </div>
           </div>
           <Row>
             <Col md={3}>
@@ -105,7 +110,8 @@ export class App extends React.Component<App.Props, App.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    currentBranch: state.app.currentBranch
+    currentBranch: state.app.currentBranch,
+    config: state.app.config
   };
 }
 

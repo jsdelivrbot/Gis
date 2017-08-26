@@ -92,10 +92,18 @@ const getCommits = async repo => {
   return tCommits;
 }
 
+const getRepoConfig = async repo => {
+  const conf = await repo.config();
+  const email = await conf.getStringBuf("user.email");
+  const name = await conf.getStringBuf("user.name");
+  const origin = await conf.getStringBuf("remote.origin.url");
+  return {email, name, origin};
+}
+
 (async () => {
   const path = require("path");
   const repo = await openRepo(Git);
-  const branches = await getAllBranches(repo);
+  const conf = await getRepoConfig(repo);
 })()
 
 module.exports = {
@@ -104,5 +112,6 @@ module.exports = {
   getCurrentBranch,
   getAllBranches,
   getDiff,
-  getCommits
+  getCommits,
+  getRepoConfig
 };

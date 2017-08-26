@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve("./server/client.html"));
 });
 
-const postRoutes = ["branches", "currentBranch", "diff", "commits"];
+const postRoutes = ["branches", "currentBranch", "diff", "commits", "config"];
 
 postRoutes.forEach(route => {
   app.post(`/${route}`, (req, res) => {
@@ -38,7 +38,8 @@ io.on("connection", socket => {
     currentBranch: storage.currentBranch,
     diff: storage.diff,
     commits: storage.commits,
-    todos: Db.getAllTodos()
+    todos: Db.getAllTodos(),
+    config: storage.config
   });
 
   socket.on("post/todos", todos => {

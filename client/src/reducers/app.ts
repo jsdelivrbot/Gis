@@ -40,7 +40,8 @@ export namespace AppState {
     currentBranch: string,
     diff: Array<Diff>,
     commits: Array<Commit>,
-    todos: Array<Todo>
+    todos: Array<Todo>,
+    config: Config
   }
 
   export enum TodoType {
@@ -61,6 +62,12 @@ export namespace AppState {
     createdAt?: number,
     completedAt?: number
   }
+
+  export interface Config {
+    email: string,
+    name: string,
+    origin: string
+  }
 }
 
 const initialState: AppState.State = {
@@ -68,7 +75,12 @@ const initialState: AppState.State = {
   currentBranch: "",
   diff: [],
   commits: [],
-  todos: []
+  todos: [],
+  config: {
+    email: null,
+    name: null,
+    origin: null
+  }
 };
 
 export default handleActions<AppState.State, Action>({

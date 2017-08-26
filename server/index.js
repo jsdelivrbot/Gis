@@ -13,9 +13,7 @@ const allClients = [];
 
 const storage = {}
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve("./server/client.html"));
-});
+app.use(express.static("./client/dist"));
 
 const postRoutes = ["branches", "currentBranch", "diff", "commits", "config"];
 
@@ -27,7 +25,7 @@ postRoutes.forEach(route => {
   });
 });
 
-const server = app.listen(8493, () => console.log("Listening on 8493"));
+const server = app.listen(8493, () => console.log("Listening on 8493.."));
 
 const io = require("socket.io")(server);
 io.on("connection", socket => {

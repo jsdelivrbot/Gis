@@ -1,6 +1,7 @@
 const chokidar = require("chokidar");
 const git = require("../git");
 const utils = require("./utils");
+const config = require("../config");
 
 const onChange = async () => {
 	const repo = await git.openRepo(git.Git);
@@ -24,8 +25,8 @@ const onChange = async () => {
 
 const watch = () => {
 	onChange();
-	console.log("Watching files..");
-	chokidar.watch(".", {ignored: /(node_modules|.*db\.json)/}).on("change", async (event, path) => {
+	console.log("Watching files at", config.repoPath);
+	chokidar.watch(config.repoPath, {ignored: /(node_modules|.*db\.json)/}).on("change", async (event, path) => {
 	  if(path) {
 	  	onChange();
 		}

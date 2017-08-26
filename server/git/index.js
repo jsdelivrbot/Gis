@@ -1,6 +1,7 @@
 const Git = require("nodegit");
+const config = require("../config");
 
-const openRepo = git => git.Repository.open("./");
+const openRepo = git => git.Repository.open(config.repoPath);
 const getCurrentBranch = repo => repo.getCurrentBranch();
 const getAllBranches = repo => repo.getReferences(3);
 

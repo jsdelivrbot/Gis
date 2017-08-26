@@ -9,7 +9,8 @@ export namespace Statistics {
   export interface Props {
     commits?: Array<AppState.Commit>,
     todos?: Array<AppState.Todo>,
-    diff?: Array<AppState.Diff>
+    diff?: Array<AppState.Diff>,
+    config?: AppState.Config
   }
 
   export interface State {
@@ -59,13 +60,18 @@ class Statistics extends React.Component<Statistics.Props, Statistics.State> {
     return todos ? todos.filter(todo => todo.status === AppState.TodoStatus.COMPLETED).length : 0;
   }
 
+  calculateCommits(commits: Array<AppState.Commit>): number {
+    return commits.filter(commit => commit.author.email === this.props.config.email).length;
+  }
+
   componentWillReceiveProps(props: Statistics.Props) {
     const commitLines = this.calculateCommitLines(props.commits);
     const diffLines = this.calculateDiffLines(props.diff);
     const linesAdded = commitLines.added + diffLines.added;
     const linesRemoved = commitLines.removed + diffLines.removed;
     const todos = this.calculateFinishedTodos(props.todos);
-    this.setState({linesAdded, linesRemoved, commits: props.commits.length, todos});
+    const commits = this.calculateCommits(this.props.commits);
+    this.setState({linesAdded, linesRemoved, commits, todos});
   }
 
   render() {
@@ -96,7 +102,8 @@ function mapStateToProps(state: RootState) {
   return {
     commits: state.app.commits,
     todos: state.app.todos,
-    diff: state.app.diff
+    diff: state.app.diff,
+    config: state.app.config
   };
 }
 

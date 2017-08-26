@@ -1,16 +1,17 @@
 .commits-container {
-	& .commit-item {
-		& .commit-id {
-			font-size: x-small;
-		}
+  & .commit-item {
+    & .commit-id {
+      font-size: x-small;
+    }
 
-		& .author-mail {
-			font-size: xx-small;
-			color: gray;
-		}
+    & .author-mail {
+      font-size: xx-small;
+      color: gray;
+    }
 
-		& .commit-summary {
-			font-size: large;
-		}
-	}
+    & .commit-summary {
+      font-size: large;
+      margin: 10px 0px;
+    }
+  }
 }

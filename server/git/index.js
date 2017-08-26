@@ -51,7 +51,7 @@ const getDiff = async repo => {
 const getCommits = async repo => {
   const walk = Git.Revwalk.create(repo);
   walk.pushHead();
-  const commits = await walk.getCommits();
+  const commits = await walk.getCommits(300);
   const tCommits = [];
 
   for(let i=0;i<commits.length;i++) {

@@ -33,6 +33,7 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
     this.handleTodoTitleChange = this.handleTodoTitleChange.bind(this);
     this.handleTodoTypeChange = this.handleTodoTypeChange.bind(this);
     this.addTodo = this.addTodo.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   addTodo(event) {
@@ -54,6 +55,12 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
     this.setState({type: event.target.value});
   }
 
+  handleRemove(id) {
+    return () => {
+      this.props.actions.removeTodo(id);
+    }
+  }
+
   render() {
     return (
       <Panel className="todos-container">
@@ -61,12 +68,17 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
           {
             this.props.todos && this.props.todos.length ?
               this.props.todos.map((todo, index) => (
-                <ListGroupItem key={index}>
-                  <Label bsStyle={todo.type === AppState.TodoType.BRANCH ? "primary" : "info"}>{todo.type}</Label>
-                  &nbsp;
-                  <span 
-                    className={classnames("message", {completed: todo.status === AppState.TodoStatus.COMPLETED})}>
+                <ListGroupItem key={index} className="todo-item">
+                  <div>
+                    <Label bsStyle={todo.type === AppState.TodoType.BRANCH ? "primary" : "info"}>{todo.type}</Label>
+                    &nbsp;
+                    <span 
+                      className={classnames("message", {completed: todo.status === AppState.TodoStatus.COMPLETED})}>
                     {todo.message}
+                  </span>
+                  </div>
+                  <span className="remove-container">
+                    <a href="#" onClick={this.handleRemove(todo.id)}>remove</a>
                   </span>
                 </ListGroupItem>
               )) :

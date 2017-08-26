@@ -27,7 +27,7 @@ function getTodoById(id) {
 
 function removeTodoById(id) {
   const {index} = getTodoById(id);
-  db.delete((`/todos[${index}]`);
+  db.delete(`/todos[${index}]`);
 }
 
 module.exports = {

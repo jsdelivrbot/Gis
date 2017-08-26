@@ -45,6 +45,11 @@ io.on("connection", socket => {
     const savedTodo = Db.saveTodo(todo);
     socket.emit("todos", Db.getAllTodos());
   });
+
+  socket.on("delete/todo", id => {
+    Db.removeTodoById(id);
+    socket.emit("todos", Db.getAllTodos());
+  });
 });
 
 observer.watch();

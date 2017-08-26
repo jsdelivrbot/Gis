@@ -37,3 +37,9 @@ export function addTodo(todo: AppState.Todo) {
     Socket.getSocket().emit("post/todo", todo);
   }
 }
+
+export function removeTodo(id: string) {
+  return dispatch => {
+    Socket.getSocket().emit("delete/todo", id);
+  }
+}

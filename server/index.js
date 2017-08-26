@@ -11,9 +11,7 @@ app.use(bodyParser.json());
 
 const allClients = [];
 
-const storage = {
-  allBranches: []
-}
+const storage = {}
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("./server/client.html"));
@@ -36,7 +34,11 @@ io.on("connection", socket => {
   allClients.push(socket);
 
   socket.emit("init", {
-    storage: storage
+    branches: storage.branches,
+    currentBranch: storage.currentBranch,
+    diff: storage.diff,
+    commits: storage.commits,
+    todos: Db.getAllTodos()
   });
 
   socket.on("post/todo", todo => {

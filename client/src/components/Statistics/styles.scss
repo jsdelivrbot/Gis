@@ -1,0 +1,13 @@
+.statistics-container {
+  & .panel-body {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  & .statistics-item {
+    text-align: center;
+    & h6, h3 {
+      margin: 0px;
+    }
+  }
+}

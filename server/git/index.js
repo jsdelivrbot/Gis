@@ -25,7 +25,7 @@ const getDiffDetails = async diff => {
         isAdded && lineCount.added++;
         isRemoved && lineCount.removed++;
         const content = line.content();
-        return `${isAdded ? "+" : ""}${isRemoved ? "-" : ""} ${content}`;
+        return `${isAdded ? "+" : ""}${isRemoved ? "-" : ""}${!isRemoved && !isAdded ? " " : ""}${content}`;
       });
       textHunks.push({
         content: texts.join(""),

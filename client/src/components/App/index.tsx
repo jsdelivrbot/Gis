@@ -10,6 +10,7 @@ import Workdir from "../Workdir";
 import Commits from "../Commits";
 import Todos from "../Todos";
 import {Row, Col} from "react-bootstrap";
+import Statistics from "../Statistics";
 import "./style.scss";
 
 export namespace App {
@@ -90,6 +91,9 @@ export class App extends React.Component<App.Props, App.State> {
             <Col md={3}>
               <Todos/>
               <Workdir/>
+            </Col>
+            <Col md={6}>
+              <Statistics/>
             </Col>
           </Row>
           {this.props.children}

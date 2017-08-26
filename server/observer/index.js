@@ -18,7 +18,7 @@ const onChange = async () => {
 	const diff = await git.getDiff(repo);
 	utils.postRequest("diff", {diff});
 
-	// Diff
+	// Commits
 	const commits = await git.getCommits(repo);
 	utils.postRequest("commits", {commits});
 }

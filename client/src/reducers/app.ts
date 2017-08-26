@@ -4,9 +4,17 @@ import {Actions, Action} from '../actions';
 export namespace AppState {
   export type Branch = string;
 
+  export interface Hunk {
+    content: string,
+    lineCount: {
+      added: number,
+      removed: number
+    }
+  }
+
   export interface Diff {
     path: string,
-    textHunks: Array<string>
+    hunks: Array<Hunk>
   }
 
   export interface Author {

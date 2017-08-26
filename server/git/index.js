@@ -15,17 +15,26 @@ const getDiffDetails = async diff => {
     for(let i=0;i<hunks.length;i++) {
       const hunk = hunks[i];
       const lines = await hunk.lines();
+      const lineCount = {
+        added: 0,
+        removed: 0
+      };
       const texts = lines.map(line => {
         const isAdded = line.oldLineno() === -1 ? true : false;
         const isRemoved = line.newLineno() === -1 ? true : false;
+        isAdded && lineCount.added++;
+        isRemoved && lineCount.removed++;
         const content = line.content();
         return `${isAdded ? "+" : ""}${isRemoved ? "-" : ""} ${content}`;
       });
-      textHunks.push(texts.join(""));
+      textHunks.push({
+        content: texts.join(""),
+        lineCount
+      });
     };
     patchesInfo.push({
       path,
-      textHunks
+      hunks: textHunks
     });
   };
   return patchesInfo;

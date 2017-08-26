@@ -35,7 +35,9 @@ const io = require("socket.io")(server);
 io.on("connection", socket => {
   allClients.push(socket);
 
-  socket.emit("init", storage);
+  socket.emit("init", {
+    storage: storage
+  });
 
   socket.on("post/todo", todo => {
     const savedTodo = Db.saveTodo(todo);

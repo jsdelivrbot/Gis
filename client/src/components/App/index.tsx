@@ -32,8 +32,7 @@ export class App extends React.Component<App.Props, App.State> {
     this.socket.setRoutes([
       {
         path: "init",
-        handle: "storage",
-        onReceive: this.props.actions.setStorage
+        onReceive: this.props.actions.init
       },
       {
         path: "branches",
@@ -78,7 +77,7 @@ export class App extends React.Component<App.Props, App.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    currentBranch: state.app.storage.currentBranch
+    currentBranch: state.app.currentBranch
   };
 }
 

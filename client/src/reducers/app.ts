@@ -24,12 +24,10 @@ export namespace AppState {
   }
 
   export interface State {
-    storage: {
-      branches: Array<AppState.Branch>,
-      currentBranch: string,
-      diff: Array<Diff>,
-      commits: Array<Commit>
-    },
+    branches: Array<AppState.Branch>,
+    currentBranch: string,
+    diff: Array<Diff>,
+    commits: Array<Commit>,
     todos: Array<Todo>
   }
 
@@ -52,12 +50,10 @@ export namespace AppState {
 }
 
 const initialState: AppState.State = {
-  storage: {
-    branches: [],
-    currentBranch: "",
-    diff: [],
-    commits: []
-  },
+  branches: [],
+  currentBranch: "",
+  diff: [],
+  commits: [],
   todos: [
     {
       message: "Add todos ui",
@@ -78,10 +74,10 @@ const initialState: AppState.State = {
 };
 
 export default handleActions<AppState.State, Action>({
-  [Actions.SET_STORAGE]: (state, action) => {
+  [Actions.INIT]: (state, action) => {
     return {
       ...state,
-      storage: action.payload.storage
+      ...action.payload.init
     };
   },
   [Actions.SAVE_TODO]: (state, action) => {
@@ -96,37 +92,25 @@ export default handleActions<AppState.State, Action>({
   [Actions.SET_BRANCHES]: (state, action) => {
     return {
       ...state,
-      storage: {
-        ...state.storage,
-        branches: action.payload.branches
-      }
+      branches: action.payload.branches
     }
   },
   [Actions.SET_DIFF]: (state, action) => {
     return {
       ...state,
-      storage: {
-        ...state.storage,
-        diff: action.payload.diff
-      }
+      diff: action.payload.diff
     }
   },
   [Actions.SET_COMMITS]: (state, action) => {
     return {
       ...state,
-      storage: {
-        ...state.storage,
-        commits: action.payload.commits
-      }
+      commits: action.payload.commits
     }
   },
   [Actions.SET_CURRENT_BRANCH]: (state, action) => {
     return {
       ...state,
-      storage: {
-        ...state.storage,
-        currentBranch: action.payload.currentBranch
-      }
+      currentBranch: action.payload.currentBranch
     }
   }
 }, initialState);

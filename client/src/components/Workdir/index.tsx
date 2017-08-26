@@ -43,7 +43,7 @@ class Workdir extends React.Component<Workdir.Props, Workdir.State> {
 
 function mapStateToProps(props: RootState) {
   return {
-    diff: props.app.storage.diff
+    diff: props.app.diff
   };
 }
 

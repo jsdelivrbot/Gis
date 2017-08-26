@@ -67,7 +67,7 @@ class Commits extends React.Component<Commits.Props, Commits.State> {
 
 function mapStateToProps(state: RootState) {
   return {
-    commits: state.app.storage.commits
+    commits: state.app.commits
   };
 }
 

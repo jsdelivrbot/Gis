@@ -37,11 +37,11 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
 
   addTodo(event) {
     if(event.charCode === 13 && this.state.title) {
-      this.props.actions.addTodo({todo: {
+      this.props.actions.addTodo({
         message: this.state.title,
         type: this.state.type,
         status: AppState.TodoStatus.PENDING
-      }});
+      });
       this.setState({title: "", type: AppState.TodoType.BRANCH});
     }
   }

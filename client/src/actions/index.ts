@@ -1,5 +1,6 @@
 import {createAction} from "redux-actions";
 import {AppState} from "../reducers/app";
+import Socket from "../utils/socket";
 
 export enum Actions {
 	SET_STORAGE = "SET_STORAGE",
@@ -14,4 +15,9 @@ export interface Action {
 }
 
 export const setStorage = createAction<Storage>(Actions[Actions.SET_STORAGE]);
-export const addTodo = createAction<{todo: AppState.Todo}>(Actions[Actions.ADD_TODO]);
+
+export function addTodo(todo: AppState.Todo) {
+	return dispatch => {
+		Socket.getSocket().emit("post/todo", todo);
+	}
+}

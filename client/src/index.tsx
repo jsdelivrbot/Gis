@@ -5,6 +5,7 @@ import { Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { configureStore } from './store';
 import { App } from './components/App';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = configureStore();
 const history = createBrowserHistory();

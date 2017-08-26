@@ -35,10 +35,12 @@ const server = app.listen(8493, () => console.log("Listening on 8493"));
 const io = require("socket.io")(server);
 io.on("connection", socket => {
   allClients.push(socket);
+
   socket.emit("init", storage);
-  socket.on("add-todo", todo => {
+
+  socket.on("post/todo", todo => {
     console.log(todo);
-  })
+  });
 });
 
 observer.watch();

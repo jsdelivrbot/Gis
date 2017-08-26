@@ -12,6 +12,10 @@ class Socket {
     this.storage = {};
   }
 
+  static getSocket() {
+    return Socket.socket;
+  }
+
   setRoutes(routes: Array<string>) {
     this.routes = routes;
   }

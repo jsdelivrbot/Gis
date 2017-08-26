@@ -10,6 +10,7 @@ function saveTodo(todo) {
     return todo;
   }
   todo.id = uniqid();
+  todo.createdAt = (new Date()).getTime();
   db.push("/todos[]", todo);
   return todo;
 }

@@ -57,7 +57,9 @@ export namespace AppState {
     id?: string,
     type: TodoType,
     message: string,
-    status: TodoStatus
+    status: TodoStatus,
+    createdAt?: number,
+    completedAt?: number
   }
 }
 

@@ -56,6 +56,7 @@ class Todos extends React.Component<Todos.Props, Todos.State> {
     });
     const completedTodos = finishedTodos.map(todo => {
       todo.status = AppState.TodoStatus.COMPLETED;
+      todo.completedAt = (new Date()).getTime();
       return todo;
     });
     this.props.actions.updateTodos(completedTodos);

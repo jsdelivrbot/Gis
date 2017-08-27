@@ -19,11 +19,11 @@ export namespace MostUsedWords {
 class LinesOfCode extends React.Component<MostUsedWords.Props, MostUsedWords.State> {
   render() {
     let dailyLoc = this.props.commits && this.props.config 
-      ? Miner.getDailyLocData(this.props.commits, this.props.config, 5)
+      ? Miner.getDailyLocData(this.props.commits, this.props.config, 30)
       : [];
     return(
       <Panel className="lines-of-code-container">
-        <LineChart width={500} height={150} data={dailyLoc}
+        <LineChart width={700} height={150} data={dailyLoc}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="shortDate" />
           <YAxis />

@@ -19,6 +19,10 @@ class Miner {
     return commits.filter(commit => commit.author.email === email);
   }
 
+  static getNonMergeCommits(commits: Array<AppState.Commit>): Array<AppState.Commit> {
+    return commits.filter(commit => commit.message.indexOf("Merge pull request") === -1);
+  }
+
   static getWordsUsedAlot(
     commits: Array<AppState.Commit>, 
     config: AppState.Config,
@@ -48,7 +52,7 @@ class Miner {
     config: AppState.Config,
     limit: number
   ): Array<Miner.DailyLoc> {
-    const selfCommits = Miner.getSelfCommits(commits, config.email);
+    const selfCommits = Miner.getNonMergeCommits(Miner.getSelfCommits(commits, config.email));
     const locDict: {[key: number]: {added: number, removed: number}} = {};
 
     selfCommits.forEach(commit => {
@@ -70,8 +74,9 @@ class Miner {
         shortDate: `${_date.getDate()}/${_date.getMonth()+1}`
       });
     }
-    dailyLoc = dailyLoc.sort((a , b) => a.date - b.date);
+    dailyLoc = dailyLoc.sort((a , b) => b.date - a.date);
     dailyLoc = dailyLoc.splice(0, limit);
+    dailyLoc = dailyLoc.sort((a , b) => a.date - b.date);
     return dailyLoc;
   }
 }

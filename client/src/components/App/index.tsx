@@ -13,6 +13,7 @@ import Todos from "../Todos";
 import {Row, Col} from "react-bootstrap";
 import Statistics from "../Statistics";
 import MostUsedWords from "../MostUsedWords";
+import LinesOfCode from "../LinesOfCode";
 import "./style.scss";
 
 export namespace App {
@@ -105,6 +106,9 @@ export class App extends React.Component<App.Props, App.State> {
               <Row>
                 <Col md={3}>
                   <MostUsedWords/>
+                </Col>
+                <Col md={9}>
+                  <LinesOfCode/>
                 </Col>
               </Row>
             </Col>

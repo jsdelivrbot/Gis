@@ -25,7 +25,7 @@ class MostUsedWords extends React.Component<MostUsedWords.Props, MostUsedWords.S
       <Panel className="most-used-words-container">
         <PieChart width={150} height={150}>
           <Pie 
-            data={words} valueKey="count" cx="50%" cy="50%" 
+            data={words} dataKey="count" cx="50%" cy="50%" 
             outerRadius={30} fill="#8884d8"
             nameKey="word" label/>
         </PieChart>
